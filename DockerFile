@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+WORKDIR /src
+
+COPY ./src ./
+
+RUN ls -l /src
+
+RUN dotnet publish -c Release -o /src/out
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+
+WORKDIR /app
+
+ENV ASPNETCORE_URLS=http://+:8111
+EXPOSE 8111
+
+COPY --from=build /src/out .
