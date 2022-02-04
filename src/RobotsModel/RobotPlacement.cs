@@ -1,6 +1,6 @@
 ﻿namespace RobotsService.Models
 {
-    public class RobotPlacment
+    public class RobotPlacement
     {
         public int XLocation { get; set; }
 

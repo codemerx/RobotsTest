@@ -3,15 +3,31 @@ using Orientation = RobotsData.Models.Orientation;
 using RobotsModel;
 using RobotsService.Abstract;
 using RobotsService.Models;
+using RobotsData;
+using RobotsModel.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace RobotsService
 {
     public class GridService : IGridService
     {
-        public List<RobotPlacment> GetRobotPlacments(Grid grid)
+        private readonly RobotsContext robotsContext;
+
+        public GridService(RobotsContext robotsContext)
         {
+            this.robotsContext = robotsContext;
+        }
+
+        public async Task<List<RobotPlacement>> SynchronizeGrid(Grid grid)
+        {
+            int? gridId = await this.GetGridIdOrDefaultBySize(grid);
+            if (gridId == null)
+            {
+                gridId = await this.AddGrid(grid);
+            }
+
             HashSet<Scent> scents = new();
-            List<RobotPlacment> robotPlacments = new();
+            List<RobotPlacement> robotPlacments = new();
             foreach (Robot robot in grid.Robots)
             {
                 bool isLost = false;
@@ -50,7 +66,9 @@ namespace RobotsService
                     }
                 }
 
-                robotPlacments.Add(new RobotPlacment()
+                this.robotsContext.Robots.Add(robot.ToDbRobot(isLost, (int)gridId));
+
+                robotPlacments.Add(new RobotPlacement()
                 {
                     IsLost = isLost,
                     Orientation = (char)robot.Orientation,
@@ -60,6 +78,23 @@ namespace RobotsService
             }
 
             return robotPlacments;
+        }
+
+        private async Task<int?> GetGridIdOrDefaultBySize(Grid grid)
+        {
+            return this.robotsContext.Grids
+                .FirstOrDefaultAsync(g => g.XSize == grid.XSize && g.YSize == grid.YSize)?.Id;
+        }
+
+        private async Task<int> AddGrid(Grid grid)
+        {
+            var dbGrid = grid.ToDbGrid();
+
+            await this.robotsContext.Grids.AddAsync(dbGrid);
+
+            await this.robotsContext.SaveChangesAsync();
+
+            return dbGrid.Id;
         }
 
         private static bool IsOutOfBoundaries(Robot robot, int xSize, int ySize)

@@ -21,13 +21,13 @@ namespace RobotsApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<RobotPlacment>>> Post([FromBody] StringifiedGrid stringifiedGrid)
+        public async Task<ActionResult<List<RobotPlacement>>> Post([FromBody] StringifiedGrid stringifiedGrid)
         {
             Grid grid = this.gridParser.Parse(stringifiedGrid.Grid, Environment.NewLine);
 
-            List<RobotPlacment> robotPlacments = this.robotsEngine.GetRobotPlacments(grid);
+            List<RobotPlacement> robotPlacments = await this.robotsEngine.SynchronizeGrid(grid);
 
-            return robotPlacments;
+            return this.Ok(robotPlacments);
         }
     }
 }

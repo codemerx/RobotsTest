@@ -5,6 +5,6 @@ namespace RobotsService.Abstract
 {
     public interface IGridService
     {
-        List<RobotPlacment> GetRobotPlacments(Grid grid);
+        Task<List<RobotPlacement>> SynchronizeGrid(Grid grid);
     }
 }
