@@ -1,4 +1,4 @@
-﻿using RobotsModel;
+﻿using RobotsData.Models;
 using RobotsParser.Abstract;
 using RobotsParser.Exceptions;
 

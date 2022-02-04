@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RobotsApi.Models
+namespace RobotsApi.InputModels
 {
     public class StringifiedGrid
     {

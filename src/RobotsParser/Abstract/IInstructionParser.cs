@@ -1,4 +1,4 @@
-﻿using RobotsModel;
+﻿using RobotsData.Models;
 
 namespace RobotsParser.Abstract
 {

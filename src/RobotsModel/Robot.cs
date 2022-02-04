@@ -1,4 +1,6 @@
-﻿namespace RobotsModel
+﻿using RobotsData.Models;
+
+namespace RobotsModel
 {
     public class Robot
     {

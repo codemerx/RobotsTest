@@ -1,4 +1,6 @@
-﻿using RobotsModel;
+﻿using Instruction = RobotsData.Models.Instruction;
+using Orientation = RobotsData.Models.Orientation;
+using RobotsModel;
 using RobotsService.Abstract;
 using RobotsService.Models;
 

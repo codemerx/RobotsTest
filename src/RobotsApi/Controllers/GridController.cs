@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RobotsApi.Models;
+using RobotsApi.InputModels;
 using RobotsModel;
 using RobotsParser.Abstract;
 using RobotsService.Abstract;
