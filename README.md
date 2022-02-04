@@ -6,9 +6,9 @@
   - Run the API.
 - How to test the API
   - When the app is running a swagger page will be opened. You can use swagger or for example, Postman to make HTTP requests.
-  - There are two implemented endpoints: [POST] https://localhost:7112/Grid and [GET] https://localhost:7112/Grid/{gridId}
+  - There are two implemented endpoints: [POST] https://localhost:7112/Grids and [GET] https://localhost:7112/Grids/{gridId}
   - The format should be JSON. We have decided to use the sample input format from the problem however there are no newlines in JSON, so instead of a newline should be used /r/n
-  - Sample input for [POST] https://localhost:7112/Grid - {"input": "5 3\r\n1 1 E\r\nRFRFRFRF\r\n3 2 N\r\nFRRFLLFFRRFLL\r\n0 3 W\r\nLLFFFRFLFL"}
+  - Sample input for [POST] https://localhost:7112/Grids - {"input": "5 3\r\n1 1 E\r\nRFRFRFRF\r\n3 2 N\r\nFRRFLLFFRRFLL\r\n0 3 W\r\nLLFFFRFLFL"}
 - How to run the tests
   - There is nothing specific, go to test explorer and run them all.
   
