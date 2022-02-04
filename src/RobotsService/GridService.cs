@@ -19,12 +19,7 @@ namespace RobotsService
 
         public async Task<GridResponse> SynchronizeGrid(GridInput grid)
         {
-            int? gridId = await this.GetGridIdOrDefaultBySize(grid);
-            if (gridId == null)
-            {
-                gridId = await this.AddGrid(grid);
-            }
-
+            int gridId = await this.AddGrid(grid);
             HashSet<Scent> scents = new();
             List<RobotResponse> robotResponse = new();
             foreach (RobotInput robot in grid.Robots)
@@ -64,7 +59,7 @@ namespace RobotsService
                     }
                 }
 
-                this.robotsContext.Robots.Add(robot.ToDbRobot(isLost, (int)gridId));
+                this.robotsContext.Robots.Add(robot.ToDbRobot(isLost, gridId));
 
                 robotResponse.Add(new RobotResponse()
                 {
@@ -79,7 +74,7 @@ namespace RobotsService
 
             GridResponse gridResponse = new()
             {
-                Id = (int)gridId,
+                Id = gridId,
                 Robots = robotResponse,
                 XSize = grid.XSize,
                 YSize = grid.YSize,
@@ -99,14 +94,6 @@ namespace RobotsService
             }
 
             return grid.FromDbGrid();
-        }
-
-        private async Task<int?> GetGridIdOrDefaultBySize(GridInput grid)
-        {
-            var dbGrid = await this.robotsContext.Grids
-                .FirstOrDefaultAsync(g => g.XSize == grid.XSize && g.YSize == grid.YSize);
-
-            return dbGrid?.Id;
         }
 
         private async Task<int> AddGrid(GridInput grid)
