@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsCore", "RobotsCore\RobotsCore.csproj", "{E06377DC-0624-4E33-B441-D8236BF853AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsService", "RobotsService\RobotsService.csproj", "{E8E5E8AA-2B5B-40A0-9C89-C5FB5D4841F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsModels", "RobotsModels\RobotsModels.csproj", "{942236E7-DE99-4F61-B82E-DF3F899CC954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsModel", "RobotsModel\RobotsModel.csproj", "{F90AFB8C-0720-4C59-937B-E110B38D0309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsParser", "RobotsParser\RobotsParser.csproj", "{3505E492-A1B7-4B9B-890B-7FD12BDB2DA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsParser", "RobotsParser\RobotsParser.csproj", "{3505E492-A1B7-4B9B-890B-7FD12BDB2DA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsApi", "RobotsApi\RobotsApi.csproj", "{E1C45131-9391-42AA-A8F2-8F2302E712AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsApi", "RobotsApi\RobotsApi.csproj", "{E1C45131-9391-42AA-A8F2-8F2302E712AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E06377DC-0624-4E33-B441-D8236BF853AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E06377DC-0624-4E33-B441-D8236BF853AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E06377DC-0624-4E33-B441-D8236BF853AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E06377DC-0624-4E33-B441-D8236BF853AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{942236E7-DE99-4F61-B82E-DF3F899CC954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{942236E7-DE99-4F61-B82E-DF3F899CC954}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{942236E7-DE99-4F61-B82E-DF3F899CC954}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{942236E7-DE99-4F61-B82E-DF3F899CC954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E5E8AA-2B5B-40A0-9C89-C5FB5D4841F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E5E8AA-2B5B-40A0-9C89-C5FB5D4841F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E5E8AA-2B5B-40A0-9C89-C5FB5D4841F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E5E8AA-2B5B-40A0-9C89-C5FB5D4841F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F90AFB8C-0720-4C59-937B-E110B38D0309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90AFB8C-0720-4C59-937B-E110B38D0309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90AFB8C-0720-4C59-937B-E110B38D0309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90AFB8C-0720-4C59-937B-E110B38D0309}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3505E492-A1B7-4B9B-890B-7FD12BDB2DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3505E492-A1B7-4B9B-890B-7FD12BDB2DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3505E492-A1B7-4B9B-890B-7FD12BDB2DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU

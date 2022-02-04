@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RobotsApi.Models;
-using RobotsCore.Abstract;
-using RobotsCore.Models;
-using RobotsModels;
+using RobotsModel;
 using RobotsParser.Abstract;
+using RobotsService.Abstract;
+using RobotsService.Models;
 
 namespace RobotsApi.Controllers
 {
@@ -12,9 +12,9 @@ namespace RobotsApi.Controllers
     public class GridController : ControllerBase
     {
         private readonly IGridParser gridParser;
-        private readonly IRobotsEngine robotsEngine;
+        private readonly IGridService robotsEngine;
 
-        public GridController(IGridParser gridParser, IRobotsEngine robotsEngine)
+        public GridController(IGridParser gridParser, IGridService robotsEngine)
         {
             this.gridParser = gridParser;
             this.robotsEngine = robotsEngine;
@@ -25,7 +25,7 @@ namespace RobotsApi.Controllers
         {
             Grid grid = this.gridParser.Parse(stringifiedGrid.Grid, Environment.NewLine);
 
-            List<RobotPlacment> robotPlacments = this.robotsEngine.Start(grid);
+            List<RobotPlacment> robotPlacments = this.robotsEngine.GetRobotPlacments(grid);
 
             return robotPlacments;
         }

@@ -1,4 +1,4 @@
-﻿namespace RobotsModels
+﻿namespace RobotsModel
 {
     public class Grid
     {

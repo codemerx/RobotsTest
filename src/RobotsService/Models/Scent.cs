@@ -1,6 +1,6 @@
-﻿using RobotsModels;
+﻿using RobotsModel;
 
-namespace RobotsCore.Models
+namespace RobotsService.Models
 {
     internal record Scent(int XPosition, int YPosition, Orientation Orientation);
 }

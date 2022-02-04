@@ -1,7 +1,10 @@
-﻿namespace RobotsApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RobotsApi.Models
 {
     public class StringifiedGrid
     {
-        public string Grid { get; set; }
+        [Required]
+        public string Grid { get; set; } = null!;
     }
 }

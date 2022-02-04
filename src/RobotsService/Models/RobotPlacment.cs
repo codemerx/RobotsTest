@@ -1,6 +1,4 @@
-﻿using RobotsModels;
-
-namespace RobotsCore.Models
+﻿namespace RobotsService.Models
 {
     public class RobotPlacment
     {
