@@ -20,9 +20,9 @@ namespace RobotsApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<GridResponse>> SynchronizeGrid([FromBody] StringifiedGrid stringifiedGrid)
+        public async Task<ActionResult<GridResponse>> SynchronizeGrid([FromBody] StringifiedGridInput stringifiedGrid)
         {
-            Grid grid = this.gridParser.Parse(stringifiedGrid.Grid, Environment.NewLine);
+            GridInput grid = this.gridParser.Parse(stringifiedGrid.Input, Environment.NewLine);
 
             GridResponse robotPlacments = await this.gridService.SynchronizeGrid(grid);
 

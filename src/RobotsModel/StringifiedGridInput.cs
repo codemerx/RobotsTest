@@ -2,9 +2,9 @@
 
 namespace RobotsApi.InputModels
 {
-    public class StringifiedGrid
+    public class StringifiedGridInput
     {
         [Required]
-        public string Grid { get; set; } = null!;
+        public string Input { get; set; } = null!;
     }
 }

@@ -13,7 +13,7 @@ namespace RobotsParser.Parsers
             this.robotParser = robotParser;
         }
 
-        public Grid Parse(string input, string delimiter)
+        public GridInput Parse(string input, string delimiter)
         {
             string[] splittedInput = input.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
 
@@ -28,19 +28,19 @@ namespace RobotsParser.Parsers
                 throw new InvalidGridException("The grid is in a wrong format");
             }
 
-            Grid grid = new();
+            GridInput grid = new();
             (grid.XSize, grid.YSize) = GetCoorinates(splittedInput.First());
             grid.Robots = this.GetRobots(splittedInput.Skip(1).ToArray());
 
             return grid;
         }
 
-        private List<Robot> GetRobots(string[] robots)
+        private List<RobotInput> GetRobots(string[] robots)
         {
-            List<Robot> result = new List<Robot>();
+            List<RobotInput> result = new List<RobotInput>();
             for (int i = 0; i < robots.Length; i += 2)
             {
-                Robot robot = this.robotParser.Parse($"{robots[i]} {robots[i + 1]}", " ");
+                RobotInput robot = this.robotParser.Parse($"{robots[i]} {robots[i + 1]}", " ");
                 result.Add(robot);
             }
 

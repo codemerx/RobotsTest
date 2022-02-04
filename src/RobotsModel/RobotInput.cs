@@ -2,7 +2,7 @@
 
 namespace RobotsModel
 {
-    public class Robot
+    public class RobotInput
     {
         public int XPosition { get; set; }
 

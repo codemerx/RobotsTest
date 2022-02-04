@@ -1,10 +1,12 @@
-﻿namespace RobotsModel.Extensions
+﻿using RobotsData.Models;
+
+namespace RobotsModel.Extensions
 {
     public static class RobotExtensions
     {
-        public static RobotsData.Models.Robot ToDbRobot(this Robot robot, bool isLost, int gridId)
+        public static Robot ToDbRobot(this RobotInput robot, bool isLost, int gridId)
         {
-            return new RobotsData.Models.Robot()
+            return new Robot()
             {
                 Orientation = robot.Orientation,
                 XPosition = robot.XPosition,
@@ -14,7 +16,7 @@
             };
         }
 
-        public static RobotResponse FromDbRobot(this RobotsData.Models.Robot robot)
+        public static RobotResponse FromDbRobot(this Robot robot)
         {
             return new RobotResponse()
             {

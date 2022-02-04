@@ -1,11 +1,10 @@
-﻿using Instruction = RobotsData.Models.Instruction;
-using Orientation = RobotsData.Models.Orientation;
-using RobotsModel;
+﻿using RobotsModel;
 using RobotsService.Abstract;
 using RobotsData;
 using RobotsModel.Extensions;
 using Microsoft.EntityFrameworkCore;
 using RobotsService.Exceptions;
+using RobotsData.Models;
 
 namespace RobotsService
 {
@@ -18,7 +17,7 @@ namespace RobotsService
             this.robotsContext = robotsContext;
         }
 
-        public async Task<GridResponse> SynchronizeGrid(Grid grid)
+        public async Task<GridResponse> SynchronizeGrid(GridInput grid)
         {
             int? gridId = await this.GetGridIdOrDefaultBySize(grid);
             if (gridId == null)
@@ -28,7 +27,7 @@ namespace RobotsService
 
             HashSet<Scent> scents = new();
             List<RobotResponse> robotResponse = new();
-            foreach (Robot robot in grid.Robots)
+            foreach (RobotInput robot in grid.Robots)
             {
                 bool isLost = false;
                 int xLastPosition = robot.XPosition;
@@ -91,7 +90,7 @@ namespace RobotsService
 
         public async Task<GridResponse> GetGrid(int gridId)
         {
-            RobotsData.Models.Grid? grid = await this.robotsContext.Grids
+            Grid? grid = await this.robotsContext.Grids
                 .Include(g => g.Robots)
                 .FirstOrDefaultAsync(g => g.Id == gridId);
             if (grid == null)
@@ -102,7 +101,7 @@ namespace RobotsService
             return grid.FromDbGrid();
         }
 
-        private async Task<int?> GetGridIdOrDefaultBySize(Grid grid)
+        private async Task<int?> GetGridIdOrDefaultBySize(GridInput grid)
         {
             var dbGrid = await this.robotsContext.Grids
                 .FirstOrDefaultAsync(g => g.XSize == grid.XSize && g.YSize == grid.YSize);
@@ -110,7 +109,7 @@ namespace RobotsService
             return dbGrid?.Id;
         }
 
-        private async Task<int> AddGrid(Grid grid)
+        private async Task<int> AddGrid(GridInput grid)
         {
             var dbGrid = grid.ToDbGrid();
 
@@ -121,7 +120,7 @@ namespace RobotsService
             return dbGrid.Id;
         }
 
-        private static bool IsOutOfBoundaries(Robot robot, int xSize, int ySize)
+        private static bool IsOutOfBoundaries(RobotInput robot, int xSize, int ySize)
         {
             return robot.XPosition < 0 
                 || robot.YPosition < 0
@@ -129,7 +128,7 @@ namespace RobotsService
                 || robot.YPosition > ySize;
         }
 
-        private static void ChangePosition(Robot robot)
+        private static void ChangePosition(RobotInput robot)
         {
             switch (robot.Orientation)
             {
@@ -148,7 +147,7 @@ namespace RobotsService
             }
         }
 
-        private static void ToLeft(Robot robot)
+        private static void ToLeft(RobotInput robot)
         {
             switch (robot.Orientation)
             {
@@ -167,7 +166,7 @@ namespace RobotsService
             }
         }
 
-        private static void ToRight(Robot robot)
+        private static void ToRight(RobotInput robot)
         {
             switch (robot.Orientation)
             {

@@ -1,17 +1,19 @@
-﻿namespace RobotsModel.Extensions
+﻿using RobotsData.Models;
+
+namespace RobotsModel.Extensions
 {
     public static class GridExtensions
     {
-        public static RobotsData.Models.Grid ToDbGrid(this Grid grid)
+        public static Grid ToDbGrid(this GridInput grid)
         {
-            return new RobotsData.Models.Grid()
+            return new Grid()
             {
                 XSize = grid.XSize,
                 YSize = grid.YSize,
             };
         }
 
-        public static GridResponse FromDbGrid(this RobotsData.Models.Grid grid)
+        public static GridResponse FromDbGrid(this Grid grid)
         {
             return new GridResponse()
             {

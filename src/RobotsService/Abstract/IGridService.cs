@@ -4,7 +4,7 @@ namespace RobotsService.Abstract
 {
     public interface IGridService
     {
-        Task<GridResponse> SynchronizeGrid(Grid grid);
+        Task<GridResponse> SynchronizeGrid(GridInput grid);
 
         Task<GridResponse> GetGrid(int gridId);
     }

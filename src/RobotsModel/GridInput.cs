@@ -1,11 +1,11 @@
 ﻿namespace RobotsModel
 {
-    public class Grid
+    public class GridInput
     {
         public int XSize { get; set; }
 
         public int YSize { get; set; }
 
-        public List<Robot> Robots { get; set; } = null!;
+        public List<RobotInput> Robots { get; set; } = null!;
     }
 }

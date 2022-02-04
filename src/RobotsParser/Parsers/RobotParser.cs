@@ -17,7 +17,7 @@ namespace RobotsParser.Parsers
             this.orientationParser = orientationParser;
         }
 
-        public Robot Parse(string robot, string delimiter)
+        public RobotInput Parse(string robot, string delimiter)
         {
             string[] robotData = robot.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
             if (robotData.Length != 4
@@ -34,7 +34,7 @@ namespace RobotsParser.Parsers
                 instructions.Add(this.instructionParser.Parse(instruction.ToString()));
             }
 
-            return new Robot()
+            return new RobotInput()
             {
                 XPosition = x,
                 YPosition = y,
