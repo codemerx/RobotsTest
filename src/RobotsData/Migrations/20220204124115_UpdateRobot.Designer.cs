@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RobotsData;
 
@@ -10,9 +11,10 @@ using RobotsData;
 namespace RobotsData.Migrations
 {
     [DbContext(typeof(RobotsContext))]
-    partial class RobotsContextModelSnapshot : ModelSnapshot
+    [Migration("20220204124115_UpdateRobot")]
+    partial class UpdateRobot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

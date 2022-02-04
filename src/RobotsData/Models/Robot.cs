@@ -4,9 +4,11 @@
     {
         public int Id { get; set; }
 
-        public int XLocation { get; set; }
+        public int XPosition { get; set; }
 
-        public int YLocation { get; set; }
+        public int YPosition { get; set; }
+
+        public bool IsLost { get; set; }
 
         public Orientation Orientation { get; set; }
 
