@@ -2,10 +2,10 @@
 using Orientation = RobotsData.Models.Orientation;
 using RobotsModel;
 using RobotsService.Abstract;
-using RobotsService.Models;
 using RobotsData;
 using RobotsModel.Extensions;
 using Microsoft.EntityFrameworkCore;
+using RobotsService.Exceptions;
 
 namespace RobotsService
 {
@@ -18,7 +18,7 @@ namespace RobotsService
             this.robotsContext = robotsContext;
         }
 
-        public async Task<List<RobotPlacement>> SynchronizeGrid(Grid grid)
+        public async Task<GridResponse> SynchronizeGrid(Grid grid)
         {
             int? gridId = await this.GetGridIdOrDefaultBySize(grid);
             if (gridId == null)
@@ -27,7 +27,7 @@ namespace RobotsService
             }
 
             HashSet<Scent> scents = new();
-            List<RobotPlacement> robotPlacments = new();
+            List<RobotResponse> robotResponse = new();
             foreach (Robot robot in grid.Robots)
             {
                 bool isLost = false;
@@ -52,7 +52,6 @@ namespace RobotsService
                             // Reverting the position
                             robot.XPosition = xLastPosition;
                             robot.YPosition = yLastPosition;
-
                             break;
                         }
                     }
@@ -68,22 +67,47 @@ namespace RobotsService
 
                 this.robotsContext.Robots.Add(robot.ToDbRobot(isLost, (int)gridId));
 
-                robotPlacments.Add(new RobotPlacement()
+                robotResponse.Add(new RobotResponse()
                 {
                     IsLost = isLost,
                     Orientation = (char)robot.Orientation,
-                    XLocation = robot.XPosition,
-                    YLocation = robot.YPosition,
+                    XPosition = robot.XPosition,
+                    YPosition = robot.YPosition,
                 });
             }
 
-            return robotPlacments;
+            await this.robotsContext.SaveChangesAsync();
+
+            GridResponse gridResponse = new GridResponse()
+            {
+                Id = (int)gridId,
+                Robots = robotResponse,
+                XSize = grid.XSize,
+                YSize = grid.YSize,
+            };
+
+            return gridResponse;
+        }
+
+        public async Task<GridResponse> GetGrid(int gridId)
+        {
+            RobotsData.Models.Grid? grid = await this.robotsContext.Grids
+                .Include(g => g.Robots)
+                .FirstOrDefaultAsync(g => g.Id == gridId);
+            if (grid == null)
+            {
+                throw new GridNotFoundException($"The grid with id: {gridId} does not exist");
+            }
+
+            return grid.FromDbGrid();
         }
 
         private async Task<int?> GetGridIdOrDefaultBySize(Grid grid)
         {
-            return this.robotsContext.Grids
-                .FirstOrDefaultAsync(g => g.XSize == grid.XSize && g.YSize == grid.YSize)?.Id;
+            var dbGrid = await this.robotsContext.Grids
+                .FirstOrDefaultAsync(g => g.XSize == grid.XSize && g.YSize == grid.YSize);
+
+            return dbGrid?.Id;
         }
 
         private async Task<int> AddGrid(Grid grid)

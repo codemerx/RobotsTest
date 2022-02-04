@@ -3,7 +3,6 @@ using RobotsApi.InputModels;
 using RobotsModel;
 using RobotsParser.Abstract;
 using RobotsService.Abstract;
-using RobotsService.Models;
 
 namespace RobotsApi.Controllers
 {
@@ -12,22 +11,28 @@ namespace RobotsApi.Controllers
     public class GridController : ControllerBase
     {
         private readonly IGridParser gridParser;
-        private readonly IGridService robotsEngine;
+        private readonly IGridService gridService;
 
-        public GridController(IGridParser gridParser, IGridService robotsEngine)
+        public GridController(IGridParser gridParser, IGridService gridService)
         {
             this.gridParser = gridParser;
-            this.robotsEngine = robotsEngine;
+            this.gridService = gridService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<RobotPlacement>>> Post([FromBody] StringifiedGrid stringifiedGrid)
+        public async Task<ActionResult<GridResponse>> SynchronizeGrid([FromBody] StringifiedGrid stringifiedGrid)
         {
             Grid grid = this.gridParser.Parse(stringifiedGrid.Grid, Environment.NewLine);
 
-            List<RobotPlacement> robotPlacments = await this.robotsEngine.SynchronizeGrid(grid);
+            GridResponse robotPlacments = await this.gridService.SynchronizeGrid(grid);
 
             return this.Ok(robotPlacments);
+        }
+
+        [HttpGet("{gridId}")]
+        public async Task<ActionResult<GridResponse>> GetGrid(int gridId)
+        {
+            return this.Ok(await this.gridService.GetGrid(gridId));
         }
     }
 }

@@ -13,5 +13,16 @@
                 GridId = gridId,
             };
         }
+
+        public static RobotResponse FromDbRobot(this RobotsData.Models.Robot robot)
+        {
+            return new RobotResponse()
+            {
+                Orientation = (char)robot.Orientation,
+                XPosition = robot.XPosition,
+                YPosition = robot.YPosition,
+                IsLost = robot.IsLost,
+            };
+        }
     }
 }
