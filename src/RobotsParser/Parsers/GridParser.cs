@@ -40,7 +40,7 @@ namespace RobotsParser.Parsers
 
         private List<RobotInput> GetRobots(string[] robots)
         {
-            List<RobotInput> result = new List<RobotInput>();
+            List<RobotInput> result = new();
             for (int i = 0; i < robots.Length; i += 2)
             {
                 RobotInput robot = this.robotParser.Parse($"{robots[i]} {robots[i + 1]}", " ");

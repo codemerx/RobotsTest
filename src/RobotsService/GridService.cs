@@ -77,7 +77,7 @@ namespace RobotsService
 
             await this.robotsContext.SaveChangesAsync();
 
-            GridResponse gridResponse = new GridResponse()
+            GridResponse gridResponse = new()
             {
                 Id = (int)gridId,
                 Robots = robotResponse,
