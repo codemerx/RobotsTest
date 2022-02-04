@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsParser", "RobotsParse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsApi", "RobotsApi\RobotsApi.csproj", "{E1C45131-9391-42AA-A8F2-8F2302E712AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsData", "RobotsData\RobotsData.csproj", "{EC56B468-F98E-4939-AAB8-9AFA2EDFF853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotsData", "RobotsData\RobotsData.csproj", "{EC56B468-F98E-4939-AAB8-9AFA2EDFF853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsTest", "RobotsTest\RobotsTest.csproj", "{ECD909C3-677E-4D73-B53B-3E864C01EC1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EC56B468-F98E-4939-AAB8-9AFA2EDFF853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC56B468-F98E-4939-AAB8-9AFA2EDFF853}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC56B468-F98E-4939-AAB8-9AFA2EDFF853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD909C3-677E-4D73-B53B-3E864C01EC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD909C3-677E-4D73-B53B-3E864C01EC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD909C3-677E-4D73-B53B-3E864C01EC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD909C3-677E-4D73-B53B-3E864C01EC1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

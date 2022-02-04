@@ -15,6 +15,9 @@ namespace RobotsParser.Parsers
 
         public GridInput Parse(string input, string delimiter)
         {
+            ArgumentNullException.ThrowIfNull(input, nameof(input));
+            ArgumentNullException.ThrowIfNull(delimiter, nameof(delimiter));
+
             string[] splittedInput = input.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
 
             if (!splittedInput.Any())
