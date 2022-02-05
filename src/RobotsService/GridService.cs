@@ -25,28 +25,22 @@ namespace RobotsService
             foreach (RobotInput robot in grid.Robots)
             {
                 bool isLost = false;
-                int xLastPosition = robot.XPosition;
-                int yLastPosition = robot.YPosition;
                 foreach (var instruction in robot.Instructions)
                 {
                     if (Instruction.Forward == instruction)
                     {
-                        Scent scent = new(robot.XPosition, robot.YPosition, robot.Orientation);
-                        if (!scents.Contains(scent))
-                        {
-                            xLastPosition = robot.XPosition;
-                            yLastPosition = robot.YPosition;
-                            ChangePosition(robot);
-                        }
-
+                        ChangePosition(robot);
                         if (IsOutOfBoundaries(robot, grid.XSize, grid.YSize))
                         {
-                            scents.Add(scent);
-                            isLost = true;
-                            // Reverting the position
-                            robot.XPosition = xLastPosition;
-                            robot.YPosition = yLastPosition;
-                            break;
+                            RevertPosition(robot);
+                            Scent scent = new(robot.XPosition, robot.YPosition);
+                            if (!scents.Contains(scent))
+                            {
+                                scents.Add(scent);
+                                isLost = true;
+
+                                break;
+                            }
                         }
                     }
                     else if(Instruction.Left == instruction)
@@ -59,7 +53,7 @@ namespace RobotsService
                     }
                 }
 
-                this.robotsContext.Robots.Add(robot.ToDbRobot(isLost, gridId));
+                await this.robotsContext.Robots.AddAsync(robot.ToDbRobot(isLost, gridId));
 
                 robotResponse.Add(new RobotResponse()
                 {
@@ -130,6 +124,25 @@ namespace RobotsService
                     break;
                 case Orientation.East:
                     robot.XPosition++;
+                    break;
+            }
+        }
+
+        private static void RevertPosition(RobotInput robot)
+        {
+            switch (robot.Orientation)
+            {
+                case Orientation.North:
+                    robot.YPosition--;
+                    break;
+                case Orientation.South:
+                    robot.YPosition++;
+                    break;
+                case Orientation.West:
+                    robot.XPosition++;
+                    break;
+                case Orientation.East:
+                    robot.XPosition--;
                     break;
             }
         }
