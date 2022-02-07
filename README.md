@@ -18,7 +18,7 @@ The project exposes all the functionality via simple  REST API. Each run is pers
     docker run --env CONNECTIONSTRINGS__ROBOTSDATABSE="<db connection string>" robots/mars:1.0 dotnet RobotsApi.dll
     ```
 
-    Database connection string needs to be provided in the value of CONNECTIONSTRINGS__ROBOTSDATABSE. This database is going to be used to persist the results of each run.
+    - Database connection string needs to be provided in the value of CONNECTIONSTRINGS__ROBOTSDATABSE. This database is going to be used to persist the results of each run.
 
 ## API Reference
 - [POST] https://localhost:8111/Grids - Allows sending the input data and returns the final positions of all robots.
@@ -60,8 +60,7 @@ The project exposes all the functionality via simple  REST API. Each run is pers
         ]
     }
     ```
-
-    Each run result is persisted under unique id on the server side. The id is returned in the id property and can be used to retrieve the results of this run later using the /Grids endpoint described below.
+- Each run result is persisted under unique id on the server side. The id is returned in the id property and can be used to retrieve the results of this run later using the /Grids endpoint described below.
 
 - [GET] https://localhost:8111/Grids/{gridId} - returns the results of a previous run given the unique id returned by the [POST] method for this run.
         
@@ -71,5 +70,4 @@ The project exposes all the functionality via simple  REST API. Each run is pers
     
 ## Further improvements
 - Logging, using Serilog or the like
-- Detailed error handling, not just returning 500
 - Integration tests
