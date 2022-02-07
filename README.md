@@ -69,5 +69,4 @@ The project exposes all the functionality via simple  REST API. Each run is pers
 - Critical parts of the system are covered by tests
     
 ## Further improvements
-- Logging, using Serilog or the like
 - Integration tests
