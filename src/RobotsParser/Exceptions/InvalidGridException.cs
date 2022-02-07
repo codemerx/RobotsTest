@@ -1,6 +1,6 @@
 ﻿namespace RobotsParser.Exceptions
 {
-    public class InvalidGridException : Exception
+    public class InvalidGridException : InvalidInputException
     {
         public InvalidGridException()
             : base()

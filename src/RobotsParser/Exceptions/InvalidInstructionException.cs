@@ -1,6 +1,6 @@
 ﻿namespace RobotsParser.Exceptions
 {
-    public class InvalidInstructionException : Exception
+    public class InvalidInstructionException : InvalidInputException
     {
         public InvalidInstructionException()
             : base()

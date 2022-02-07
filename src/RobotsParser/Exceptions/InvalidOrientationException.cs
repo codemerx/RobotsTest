@@ -1,6 +1,6 @@
 ﻿namespace RobotsParser.Exceptions
 {
-    public class InvalidOrientationException : Exception
+    public class InvalidOrientationException : InvalidInputException
     {
         public InvalidOrientationException()
             : base()

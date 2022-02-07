@@ -37,12 +37,13 @@ namespace RobotsApi
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/error-development");
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
             else
             {
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
 
