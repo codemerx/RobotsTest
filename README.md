@@ -13,7 +13,7 @@ The project exposes all the functionality via simple  REST API. Each run is pers
         ```
         docker build -f ./DockerFile . -t robots/mars:1.0
 
-        docker run —env CONNECTIONSTRINGS__ROBOTSDATABSE=<db connection string> --rm robots/mars:1.0 dotnet ef database update
+        docker run —env CONNECTIONSTRINGS__ROBOTSDATABSE=<db connection string> --rm robots/mars:1.0 dotnet ef database update -s /src/RobotsApi
 
         docker run —env CONNECTIONSTRINGS__ROBOTSDATABSE=<db connection string> robots/mars:1.0 dotnet RobotsApi.dll
         ```
