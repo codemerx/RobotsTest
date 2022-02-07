@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace RobotsApi
 {
     public class Program
@@ -12,6 +14,8 @@ namespace RobotsApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<StartUp>();
-                });
+                })
+                .UseSerilog((context, services, loggerConfiguration) =>
+                    loggerConfiguration.WriteTo.Console());
     }
 }

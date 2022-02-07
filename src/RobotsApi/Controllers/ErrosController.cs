@@ -11,18 +11,31 @@ namespace RobotsApi.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorsController : ControllerBase
     {
+        private readonly ILogger<ErrorsController> logger;
+
+        public ErrorsController(ILogger<ErrorsController> logger)
+        {
+            this.logger = logger;
+        }
+
         [Route("error-development")]
-        public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
+        public ActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
         {
             if (!hostEnvironment.IsDevelopment())
             {
                 return this.NotFound();
             }
 
-            IExceptionHandlerFeature? context =
-                HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            IExceptionHandlerFeature context = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            if (context == null)
+            {
+                return this.NotFound();
+            }
+
             Exception exception = context.Error;
             HttpStatusCode code = GetStatusCode(exception);
+
+            this.logger.LogError(exception, "An exception was thrown with message \"{ExceptionMessage}\". Status code \"{StatusCode}\"", exception.Message, code);
 
             return this.Problem(
                 detail: exception.StackTrace,
@@ -31,12 +44,19 @@ namespace RobotsApi.Controllers
         }
 
         [Route("error")]
-        public IActionResult Error()
+        public ActionResult Error()
         {
-            IExceptionHandlerFeature context = HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            IExceptionHandlerFeature context = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            if (context == null)
+            {
+                return this.NotFound();
+            }
+
             Exception exception = context.Error;
             HttpStatusCode code = GetStatusCode(exception);
-            
+
+            this.logger.LogError(exception, "An exception was thrown with message \"{ExceptionMessage}\". Status code \"{StatusCode}\"", exception.Message, code);
+
             if (code != HttpStatusCode.InternalServerError)
             {
                 return this.Problem(
