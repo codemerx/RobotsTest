@@ -8,7 +8,15 @@ RUN ls -l /src
 
 RUN dotnet publish -c Release -o /src/out
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+RUN dotnet tool install -g dotnet-ef --version 6.0.1
+
+ENV PATH $PATH:/root/.dotnet/tools
+
+WORKDIR /src
+
+COPY --from=build /src .
 
 WORKDIR /app
 
