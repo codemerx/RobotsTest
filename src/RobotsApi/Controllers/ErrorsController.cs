@@ -26,7 +26,7 @@ namespace RobotsApi.Controllers
                 return this.NotFound();
             }
 
-            IExceptionHandlerFeature context = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            IExceptionHandlerFeature? context = this.HttpContext.Features.Get<IExceptionHandlerFeature>();
             if (context == null)
             {
                 return this.NotFound();
@@ -46,7 +46,7 @@ namespace RobotsApi.Controllers
         [Route("error")]
         public ActionResult Error()
         {
-            IExceptionHandlerFeature context = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            IExceptionHandlerFeature? context = this.HttpContext.Features.Get<IExceptionHandlerFeature>();
             if (context == null)
             {
                 return this.NotFound();
