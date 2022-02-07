@@ -2,7 +2,7 @@
 
 The project exposes all the functionality via simple  REST API. Each run is persisted in a database and the results can be requested at a later point.
 
-- Setup
+## Setup
     - Development mode / Visual Studio
         - VS 2022 is needed because the project is on dotnet 6.
         - Run the command "update-database" in the package manager console in order to apply the migrations.
@@ -20,7 +20,7 @@ The project exposes all the functionality via simple  REST API. Each run is pers
 
         Database connection string needs to be provided in the value of CONNECTIONSTRINGS__ROBOTSDATABSE. This database is going to be used to persist the results of each run.
 
-- API Reference
+## API Reference
     - [POST] https://localhost:8111/Grids - Allows sending the input data and returns the final positions of all robots.
         - Sample input: 
                 
@@ -65,6 +65,11 @@ The project exposes all the functionality via simple  REST API. Each run is pers
 
     - [GET] https://localhost:8111/Grids/{gridId} - returns the results of a previous run given the unique id returned by the [POST] method for this run.
         
-- Notes
+## Notes
     - Swagger is available in development mode.
     - Critical parts of the system are covered by tests
+    
+## Further improvements
+    - Logging, using Serilog or the like
+    - Detailed error handling, not just returning 500
+    - Integration tests
