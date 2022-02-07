@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using RobotsApi.Infrastructure;
 using RobotsData;
 
@@ -23,8 +24,8 @@ namespace RobotsApi
                      x.EnableRetryOnFailure(6);
                  }));
 
+            services.AddControllers();
             services.AddRouting();
-            services.AddMvc();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
@@ -45,7 +46,6 @@ namespace RobotsApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseEndpoints(
